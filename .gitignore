@@ -1,0 +1,7 @@
+# Ignora tudo por padrão
+*
+# Mas permite os diretórios essenciais do projeto
+!.gitignore
+!app/
+!tests/
+!.github/
