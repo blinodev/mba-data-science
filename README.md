@@ -6,33 +6,37 @@ Organização do Projeto Segundo a Metodologia CRISP-DM
 
 Este documento descreve a estrutura do projeto de processamento e limpeza de dados para previsão do índice DST, organizada segundo a metodologia CRISP-DM (Cross Industry Standard Process for Data Mining).
 
-1. Entendimento do Negócio
 
-Objetivo: Prever tempestades geomagnéticas por meio do índice DST utilizando dados solares, solares-interplanetários e manchas solares.
 
-Previsão do índice DST com base em dados históricos.
+1. Entendimento do Negócio 🚀
 
-Suporte à tomada de decisão sobre eventos espaciais extremos.
+Objetivo: Prever tempestades geomagnéticas por meio do índice DST utilizando dados solares, interplanetários e de manchas solares.
 
-2. Entendimento dos Dados
+Antecipar eventos espaciais extremos que afetam redes elétricas e sistemas de comunicação.
+
+Utilizar o índice DST como métrica chave para indicar distúrbios na magnetosfera.
+
+2. Entendimento dos Dados 🧠
 
 Fontes de dados:
 
 labels.csv: contém o índice DST (variável alvo).
 
-solar_wind.csv: contém dados interplanetários (ex: densidade, velocidade, campo magnético).
+solar_wind.csv: contém dados do vento solar e campo magnético interplanetário.
 
-sunspots.csv: contém o número de manchas solares suavizadas.
+sunspots.csv: contém o número de manchas solares suavizado (SSN).
 
-Características:
+Características principais:
 
-Campos temporais com período comum (period).
+Coluna temporal comum: period.
 
-Presença de valores ausentes e possíveis outliers.
+Presença de valores ausentes e outliers.
 
-3. Preparação dos Dados
+Necessidade de padronização e limpeza.
 
-Etapas implementadas no pipeline (app/pipeline.py):
+3. Preparação dos Dados 🔧
+
+Pipeline implementado em app/pipeline.py:
 
 Carregamento:
 
@@ -42,57 +46,73 @@ Limpeza:
 
 Remoção de valores nulos com dropna().
 
-Detecção e remoção de outliers via método IQR por coluna.
+Detecção e remoção de outliers com base no método IQR por coluna.
 
 Integração:
 
-Junção dos datasets por period com merge().
+Junção dos três datasets por period usando merge().
 
 Exportação:
 
-Salvamento do dataset final em processed_data.csv.
+Salvamento do dataset processado como processed_data.csv.
 
-4. Modelagem (futura)
+4. Modelagem (Etapa Futura) 🤖
 
-O dataset limpo será utilizado para treinamento de modelos como LSTM ou Temporal Fusion Transformer (TFT).
+O dataset limpo será base para modelos de aprendizado de máquina.
 
-5. Avaliação (futura)
+Possíveis modelos: LSTM, Temporal Fusion Transformer (TFT), Random Forest.
 
-Métricas: MAE, RMSE, R² para avaliar a performance da previsão do DST.
+5. Avaliação (Etapa Futura) 📊
 
-6. Deploy (futura)
+Avaliação do desempenho preditivo com métricas como:
+
+MAE (Mean Absolute Error)
+
+RMSE (Root Mean Squared Error)
+
+R² (Coeficiente de Determinação)
+
+6. Deploy (Etapa Futura) 🚢
 
 Automatização do pipeline com GitHub Actions.
 
-Publicação de previsões em dashboards ou alertas automatizados.
+Integração com dashboards (por exemplo, Power BI ou Streamlit).
 
-Testes Automatizados
+Geração de alertas baseados em predições de eventos críticos.
 
-Objetivo: Garantir a robustez do pipeline com dados reais.
 
-Arquivo: tests/test_pipeline_real_data.py
 
-Verificações:
+Testes Automatizados ✅
 
-Arquivos são carregados corretamente.
+Objetivo: Validar o funcionamento do pipeline com dados reais.
 
-Dados são limpos e combinados com sucesso.
+Arquivo de testes: tests/test_pipeline_real_data.py
 
-Arquivo final é gerado e contém as colunas esperadas.
+Cobertura dos testes:
 
-Estrutura de Pastas
+Verifica se os arquivos .csv são carregados corretamente.
+
+Confirma remoção de nulos e outliers.
+
+Checa integridade do dataset final gerado.
+
+Assegura que a coluna period esteja presente e bem formatada.
+
+Estrutura de Pastas do Projeto 📁
 
 my_tcc_project/
 ├── app/
-│ ├── pipeline.py
-│ ├── processing.py
-│ └── data.py
+│   ├── pipeline.py
+│   ├── processing.py
+│   └── data.py
 ├── data/
-│ ├── labels.csv
-│ ├── solar_wind.csv
-│ └── sunspots.csv
+│   ├── labels.csv
+│   ├── solar_wind.csv
+│   └── sunspots.csv
 ├── tests/
-│ └── test_pipeline_real_data.py
+│   └── test_pipeline_real_data.py
+├── processed/
+│   └── processed_data.csv
 └── README.md
 
-Autor: LinoÚltima atualização: Maio/2025
+Autor: Lino 👨‍🚀Última atualização: Maio/2025 🗓️
