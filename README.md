@@ -1,11 +1,8 @@
-# MBA-DATA-SCIENCE
-Modelo de previsão das tempestades geomagneticas.
+# Modelo de previsão das tempestades geomagneticas.
 
 Organização do Projeto Segundo a Metodologia CRISP-DM
 
 Este documento descreve a estrutura do projeto de processamento e limpeza de dados para previsão do índice DST, organizada segundo a metodologia CRISP-DM (Cross Industry Standard Process for Data Mining).
-
-
 
 1. Entendimento do Negócio 🚀
 
