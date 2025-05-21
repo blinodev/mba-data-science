@@ -116,5 +116,6 @@ my_tcc_project/
 ├── processed/
 │   └── processed_data.csv
 └── README.md
+```
 
 Autor: Lino 👨‍🚀Última atualização: Maio/2025 🗓️
