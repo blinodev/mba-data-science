@@ -100,19 +100,6 @@ Assegura que a coluna period esteja presente e bem formatada.
 
 Estrutura de Pastas do Projeto 📁
 
-my_tcc_project/
-├── app/
-│   ├── pipeline.py
-│   ├── processing.py
-│   └── data.py
-├── data/
-│   ├── labels.csv
-│   ├── solar_wind.csv
-│   └── sunspots.csv
-├── tests/
-│   └── test_pipeline_real_data.py
-├── processed/
-│   └── processed_data.csv
-└── README.md
+<pre><code class="language-bash">```bash my_tcc_project/ ├── app/ │ ├── pipeline.py │ ├── processing.py │ └── data.py ├── data/ │ ├── labels.csv │ ├── solar_wind.csv │ └── sunspots.csv ├── tests/ │ └── test_pipeline_real_data.py ├── processed/ │ └── processed_data.csv └── README.md ```</code></pre>
 
 Autor: Lino 👨‍🚀Última atualização: Maio/2025 🗓️
