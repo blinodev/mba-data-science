@@ -5,5 +5,5 @@
 !.gitignore
 !app/
 !tests/
-!data/
+!data_pipeline/
 !.github/
