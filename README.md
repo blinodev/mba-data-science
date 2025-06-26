@@ -101,17 +101,18 @@ Estrutura de Pastas do Projeto 📁
 ```bash
 my_tcc_project/
 ├── app/
-│   ├── pipeline.py
-│   ├── processing.py
-│   └── data.py
-├── data/
-│   ├── labels.csv
-│   ├── solar_wind.csv
-│   └── sunspots.csv
+│   ├── data.py
+│   └── model_rgline.py
+│   
+├── src/
+│   ├── linear_regression.py
+│   ├── transformer_model_ACE.py
+│   ├── transformer_model_DSCOVR.py
+│   └── transformer_model_DSCOVR.py
+
 ├── tests/
-│   └── test_pipeline_real_data.py
-├── processed/
-│   └── processed_data.csv
+│   ├── test_data.py
+│   └── test_rgline.py
 └── README.md
 ```
 
