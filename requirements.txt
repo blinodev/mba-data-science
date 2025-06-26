@@ -1,0 +1,9 @@
+pandas
+numpy
+scikit-learn>=1.0
+matplotlib
+seaborn
+jupyter
+streamlit
+tensorflow
+gdown

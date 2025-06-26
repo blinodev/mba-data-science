@@ -1,9 +1,17 @@
 # Ignora tudo por padrão
 *
 
-# Mas permite estes diretórios essenciais
+# Mas permite estes diretórios e arquivos essenciais
 !.gitignore
+!README.md
+!requirements.txt
+!scripts/
 !app/
 !tests/
 !data_pipeline/
 !.github/
+
+# Ignora arquivos de dados grandes
+data/
+*.csv
+*.pkl
