@@ -76,8 +76,6 @@ Integração com dashboards (por exemplo, Power BI ou Streamlit).
 
 Geração de alertas baseados em predições de eventos críticos.
 
-
-
 Testes Automatizados ✅
 
 Objetivo: Validar o funcionamento do pipeline com dados reais.
@@ -100,10 +98,6 @@ Estrutura de Pastas do Projeto 📁
 
 ```bash
 my_tcc_project/
-├── app/
-│   ├── data.py
-│   └── model_rgline.py
-│   
 ├── src/
 │   ├── linear_regression.py
 │   ├── transformer_model_ACE.py

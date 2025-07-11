@@ -1,15 +1,18 @@
-# Ignora tudo por padrão
-*
+# Ignora pastas/arquivos grandes
+venv/
+.venv/
+data/
+*.csv
+*.pkl
 
-# Mas permite estes diretórios e arquivos essenciais
+# Permite diretórios e arquivos essenciais dentro da raiz
 !.gitignore
 !README.md
 !requirements.txt
 !src/
 !tests/
 !.github/
-
-# Ignora arquivos de dados grandes
-data/
-*.csv
-*.pkl
+!main.py
+!main2.py
+!notebooks/
+!output/

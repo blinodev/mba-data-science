@@ -1,0 +1,12 @@
+[
+  "tests/test_data.py::test_csv_files[labels.csv-expected_cols0]",
+  "tests/test_data.py::test_csv_files[solar_wind.csv-expected_cols1]",
+  "tests/test_data.py::test_csv_files[sunspots.csv-expected_cols2]",
+  "tests/test_data.py::test_csv_structure[labels.csv-expected_cols0]",
+  "tests/test_data.py::test_csv_structure[solar_wind.csv-expected_cols1]",
+  "tests/test_data.py::test_csv_structure[sunspots.csv-expected_cols2]",
+  "tests/test_data.py::test_load_data",
+  "tests/test_rgline.py::test_model_metrics",
+  "tests/test_rgline.py::test_predict_output_shape",
+  "tests/test_rgline.py::test_train_model"
+]

@@ -1,0 +1,8 @@
+{
+  "tests/test_evolution.py": true,
+  "tests/test_model.py": true,
+  "tests/test_data.py::test_load_data": true,
+  "tests/test_data.py::test_csv_files[labels.csv-expected_cols0]": true,
+  "tests/test_data.py::test_csv_files[solar_wind.csv-expected_cols1]": true,
+  "tests/test_data.py::test_csv_files[sunspots.csv-expected_cols2]": true
+}
