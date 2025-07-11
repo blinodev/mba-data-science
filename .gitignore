@@ -5,11 +5,8 @@
 !.gitignore
 !README.md
 !requirements.txt
-!scripts/
-!app/
 !src/
 !tests/
-!data_pipeline/
 !.github/
 
 # Ignora arquivos de dados grandes
