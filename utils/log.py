@@ -1,7 +1,13 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Jul 15 11:09:37 2025
+
+Logging e relatórios
 
 """
-Logging e relatórios
-"""
+
+
+# log.py
 
 import logging
 import os
@@ -42,6 +48,9 @@ def configurar_logging():
     
     return log_file
 
+import logging
+from sklearn.metrics import r2_score, mean_squared_error
+import numpy as np
 
 def registrar_modelo(nome_modelo, modelo, X_train, y_train, X_test, y_test):
     """
@@ -97,3 +106,4 @@ def registrar_modelo(nome_modelo, modelo, X_train, y_train, X_test, y_test):
         logging.info(message)
 
     return {'train': metrics_train, 'test': metrics_test}
+

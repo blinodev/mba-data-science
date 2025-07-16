@@ -24,17 +24,46 @@ from sklearn.ensemble import (
 def estimar_modelo(df, formula):
     return smf.ols(formula=formula, data=df).fit()
 
-# Diagnóstico dos resíduos
-def diagnosticar_residuos(modelo):
-    residuos = modelo.resid
-    logging.info(f"Resumo dos resíduos:\n{residuos.describe()}")
 
-# VIF - multicolinearidade
-def analisar_multicolinearidade(X):
-    vif_data = pd.DataFrame()
-    vif_data['variavel'] = X.columns
-    vif_data['VIF'] = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
-    return vif_data
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+
+def diagnosticar_residuos(modelo):
+    """
+    Exibe diagnóstico dos resíduos:
+    - Estatísticas descritivas
+    - Histograma com curva de distribuição normal ajustada
+    """
+    residuos = modelo.resid
+    mu = residuos.mean()
+    std = residuos.std()
+
+    logging.info(f"\n📊 Resumo dos resíduos:\n{residuos.describe()}")
+
+    # Plotando histograma com curva normal
+    plt.figure(figsize=(8, 6))
+    plt.hist(residuos, bins=30, density=True, alpha=0.8, color='blue')
+
+    xmin, xmax = plt.xlim()
+    x = np.linspace(xmin, xmax, 1000)
+    p = norm.pdf(x, mu, std)
+    plt.plot(x, p, linewidth=3, color='red')
+
+    plt.xlabel('Resíduos', fontsize=11)
+    plt.ylabel('Densidade', fontsize=11)
+
+    # Removendo bordas superior e direita
+    ax = plt.gca()
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['bottom'].set_linewidth(1.5)
+    ax.spines['left'].set_linewidth(1.5)
+
+    plt.tight_layout()
+    plt.show()
+
+
+
 
 # Análise de splits de árvore
 def analise_splits(modelo, X_train=None, y_train=None):
