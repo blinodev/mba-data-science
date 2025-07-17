@@ -1,10 +1,13 @@
 
 # main.py
 
-import os  
+
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # 0 = all logs, 1 = remove INFO, 2 = remove WARNING, 3 = remove all (exceto erro fatal)
 import sys
 import logging
 import pandas as pd
+from utils.log import configurar_logging
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
 from utils.plot import (relatorio_missing, 
@@ -23,7 +26,11 @@ from utils.plot import (relatorio_missing,
                    plotar_resultados_deep_learning
 
 )
-from utils.log import configurar_logging, registrar_modelo 
+from utils.log import (configurar_logging,
+                       registrar_modelo,
+
+                        
+)
 from modelos.model import (treinar_regressao, 
                      treinar_e_registrar, 
                      estimar_modelo, 
@@ -34,7 +41,8 @@ from modelos.model import (treinar_regressao,
                      tunar_random_forest,
                      executar_modelos_arvores,
                      treinar_random_forest,
-                     treinar_transformer
+                     treinar_transformer,
+                     treinar_e_registrar_transformer
                      
 )
 
@@ -163,17 +171,24 @@ def main():
 
         dados_prox_h = pd.read_pickle(caminho_transformer)
         X_tr_train, X_tr_test, y_tr_train, y_tr_test = preparar_dados_transformer(
-            dados_prox_h 
-            
+            dados_prox_h             
         )
-
-        modelo_transformer, metrics_transformer = treinar_e_registrar(
+        # Treinamento e registro do modelo Transformer com histórico
+        modelo_transformer, history_transformer, metrics_transformer = treinar_e_registrar_transformer(
             "Transformer",
             treinar_transformer,
             X_tr_train, y_tr_train,
-            X_tr_test, y_tr_test
-        )
+            X_tr_test, y_tr_test,
+            epochs=20
+)
 
+        plotar_resultados_deep_learning(
+            modelo_transformer,
+            X_tr_test,
+            y_tr_test,
+            prefixo_nome="modelo_dst"
+)
+        
         # ========= Avaliação e comparação final =========
         logging.info("\n" + "="*50)
         logging.info("📈 AVALIAÇÃO FINAL DOS MODELOS")
@@ -203,9 +218,7 @@ def main():
             resultados_rmse.append(aval["RMSE"])
 
         plotar_comparacao_modelos(nomes, resultados_r2, resultados_rmse)
-        modelo_transformer, history_transformer = treinar_transformer(X_tr_train, y_tr_train, epochs=20)
-        plotar_resultados_deep_learning(modelo_transformer, X_tr_test, y_tr_test, history=history_transformer, prefixo_nome="modelo_dst")
-
+        
         
     except Exception as e:
         logging.error(f"\n❌ Erro durante a execução: {str(e)}")

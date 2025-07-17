@@ -1,10 +1,13 @@
-# -*- coding: utf-8 -*-
+
 """
 Created on Tue Jul 15 12:09:57 2025
 
 @author: familia
 """
 # modelos.py
+import os
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"  # 0 = todos os logs, 1 = info removido, 2 = warning removido, 3 = error removido
+import tensorflow as tf
 import logging
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
@@ -23,6 +26,11 @@ def treinar_e_registrar(nome, func_treino, X_train, y_train, X_test, y_test, **k
     modelo = func_treino(X_train, y_train, **kwargs)
     metrics = registrar_modelo(nome, modelo, X_train, y_train, X_test, y_test)
     return modelo, metrics
+
+def treinar_e_registrar_transformer(nome, func_treino, X_train, y_train, X_test, y_test, **kwargs):
+    modelo, history = func_treino(X_train, y_train, **kwargs)
+    metrics = registrar_modelo(nome, modelo, X_train, y_train, X_test, y_test)
+    return modelo, history, metrics
 
 # Estima modelo OLS com fórmula
 def estimar_modelo(df, formula):
@@ -67,7 +75,7 @@ def diagnosticar_residuos(modelo):
     ax.spines['left'].set_linewidth(1.5)
 
     plt.tight_layout()
-    plt.show()
+    
 
 
 def verificar_tamanhos(X_train, y_train, X_test=None, y_test=None):
@@ -92,6 +100,7 @@ def verificar_tamanhos(X_train, y_train, X_test=None, y_test=None):
 
 
 from sklearn.tree import DecisionTreeRegressor
+import pandas as pd
 
 def analise_splits(tree_reg, X_train, y_train, random_state=42):
     """
@@ -124,7 +133,7 @@ def analise_splits(tree_reg, X_train, y_train, random_state=42):
     return tree_split
 
 from sklearn.ensemble import RandomForestRegressor
-
+import logging
 
 def executar_modelos_arvores(X_train, y_train, modelo_tipo=None, usar_tuning=False, **kwargs):
     """
@@ -376,8 +385,6 @@ def treinar_transformer(X_train, y_train, epochs=20, batch_size=32, learning_rat
     return model, history
 
 
-
-import tensorflow as tf
 from tensorflow.keras import layers, models, optimizers, losses
 
 class TransformerRegressor(tf.keras.Model):

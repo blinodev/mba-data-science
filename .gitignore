@@ -1,6 +1,7 @@
 # Ignora pastas/arquivos grandes
 venv/
 src/
+tests/
 .venv/
 data/
 *.csv

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+
 """
 Created on Tue Jul 15 10:49:20 2025
 
@@ -192,7 +192,7 @@ def exibir_model(modelo, X_test, y_test, nome_modelo="Modelo", salvar_em=None):
     os.makedirs(os.path.dirname(salvar_em), exist_ok=True)
 
     plt.savefig(salvar_em, dpi=100, bbox_inches='tight', pad_inches=0)
-    plt.show()
+    plt.close()
 
     print(f"📊 Gráfico salvo em: {salvar_em}")
     
@@ -223,8 +223,9 @@ def plotar_arvore_decisao(modelo, X, titulo="Árvore de Decisão", salvar_em=Non
         import os
         os.makedirs(os.path.dirname(salvar_em), exist_ok=True)
         plt.savefig(salvar_em, bbox_inches='tight')
+        plt.close()
 
-    plt.show()
+    
 
 
 import pandas as pd
@@ -273,11 +274,15 @@ def exibir_importancia_variaveis(modelo, X_train, salvar_em="output/importancia_
     # Garantir pasta de saída
     os.makedirs(os.path.dirname(salvar_em), exist_ok=True)
     plt.savefig(salvar_em, dpi=100, bbox_inches='tight', pad_inches=0)
-    plt.show()
+    plt.close()
+    
 
     print(f"📊 Gráfico salvo em: {salvar_em}")
     
-
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import os
 
 def plotar_fitted_values(y_true, y_pred, nome_modelo="Modelo", salvar_em=None, y_label="Previsto"):
     """
@@ -300,10 +305,16 @@ def plotar_fitted_values(y_true, y_pred, nome_modelo="Modelo", salvar_em=None, y
     if salvar_em:
         os.makedirs(os.path.dirname(salvar_em), exist_ok=True)
         plt.savefig(salvar_em, dpi=100, bbox_inches='tight', pad_inches=0)
+        plt.close()
         print(f"📊 Gráfico salvo em: {salvar_em}")
     
-    plt.show()
+    
 
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 from collections import OrderedDict
@@ -430,13 +441,15 @@ def plotar_comparacao_modelos(nomes_modelos, r2_scores, rmse_scores, nome_modelo
 
     os.makedirs(os.path.dirname(salvar_em), exist_ok=True)
     plt.savefig(salvar_em, dpi=100, bbox_inches='tight', pad_inches=0)
-    plt.show()
+    plt.close()
+    
+
 
 import matplotlib.pyplot as plt
 import pandas as pd
 import os
 
-def plotar_resultados_deep_learning(modelo, X_test, y_test, prefixo_nome="deep"):
+def plotar_resultados_deep_learning(modelo, X_test, y_test, prefixo_nome="deep", salvar_plot=True):
     """
     Plota os gráficos de:
     - Real vs Previsto (primeiras 100 amostras)
@@ -448,7 +461,12 @@ def plotar_resultados_deep_learning(modelo, X_test, y_test, prefixo_nome="deep")
         X_test (pd.DataFrame ou np.ndarray): Dados de teste (features)
         y_test (pd.Series ou np.ndarray): Valores reais do target
         prefixo_nome (str): Prefixo para os nomes dos arquivos salvos
+        salvar_plot (bool): Se True, salva as imagens em arquivos; se False, exibe os gráficos
     """
+
+    import os
+    import matplotlib.pyplot as plt
+    import pandas as pd
 
     os.makedirs("output", exist_ok=True)
 
@@ -463,7 +481,7 @@ def plotar_resultados_deep_learning(modelo, X_test, y_test, prefixo_nome="deep")
     plt.figure(figsize=(12, 5))
     plt.plot(df_resultados['Real'][:100], label='Real')
     plt.plot(df_resultados['Previsto'][:100], label='Previsto', linestyle='--')
-    plt.title(f'🔍 Real vs Previsto - {prefixo_nome}')
+    plt.title(f' Real vs Previsto - {prefixo_nome}')
     plt.xlabel('Amostras')
     plt.ylabel('Target')
     plt.legend()
@@ -471,6 +489,8 @@ def plotar_resultados_deep_learning(modelo, X_test, y_test, prefixo_nome="deep")
     plt.tight_layout()
     plt.savefig(f"output/{prefixo_nome}_fitted_values.png")
     plt.close()
+        
+    
 
     # === Histórico de treinamento ===
     history_df = pd.DataFrame(modelo.history.history).select_dtypes(include=['number'])
@@ -478,25 +498,25 @@ def plotar_resultados_deep_learning(modelo, X_test, y_test, prefixo_nome="deep")
     if not history_df.empty:
         # Todas as métricas
         history_df.plot(figsize=(10, 6))
-        plt.title(f'📈 Histórico de Métricas - {prefixo_nome}')
+        plt.title(f' Histórico de Métricas - {prefixo_nome}')
         plt.xlabel('Épocas')
         plt.grid(True)
         plt.tight_layout()
         plt.savefig(f"output/{prefixo_nome}_history_all_metrics.png")
         plt.close()
+            
+       
 
         # Apenas perda (loss/val_loss)
         if 'loss' in history_df.columns and 'val_loss' in history_df.columns:
             history_df[['loss', 'val_loss']].plot(figsize=(10, 6))
-            plt.title(f'📉 Curva de Perda - {prefixo_nome}')
+            plt.title(f' Curva de Perda - {prefixo_nome}')
             plt.xlabel('Épocas')
             plt.ylabel('Perda')
             plt.grid(True)
             plt.tight_layout()
             plt.savefig(f"output/{prefixo_nome}_loss_curve.png")
             plt.close()
-
-   
-
-   
-   
+            
+            
+            
